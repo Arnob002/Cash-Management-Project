@@ -1,0 +1,78 @@
+{% extends 'master/base.html' %}
+
+{% block content %}
+  <h1>Welcome,{{ request.user }}</h1>
+  <h3>Cash Flow Overview</h3>
+
+  <div class="d-flex gap-4">
+    <div class="card border-info mb-3" style="width: 18rem;">
+      <h5 class="card-header">Total Income</h5>
+      <div class="card-body">
+        <p class="card-text">{{ total_cash }} Tk</p>
+      </div>
+    </div>
+    <div class="card border-info mb-3" style="width: 18rem;">
+      <h5 class="card-header">Total Expense</h5>
+      <div class="card-body">
+        <p class="card-text">{{ total_expense }} Tk</p>
+      </div>
+    </div>
+    <div class="card border-info mb-3" style="width: 18rem;">
+      <h5 class="card-header">Current Balance</h5>
+      <div class="card-body">
+        <p class="card-text">{{ current_balance }} Tk</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>Transection</h2>
+  <h3>Cash-Info</h3>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Source</th>
+        <th scope="col">Date & Time</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for cash in cash_data %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ cash.source }}</td>
+          <td>{{ cash.datetime }}</td>
+          <td>{{ cash.amount }}</td>
+          <td>{{ cash.description }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h3>Expense-Info</h3>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date & Time</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Description</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for expense in expense_data %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ expense.datetime }}</td>
+          <td>{{ expense.amount }}</td>
+          <td>{{ expense.description }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+{% endblock %}
